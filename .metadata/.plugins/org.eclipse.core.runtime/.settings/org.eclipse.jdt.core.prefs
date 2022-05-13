@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+org.eclipse.jdt.core.builder.resourceCopyExclusionFilter=
+org.eclipse.jdt.core.classpathVariable.ECLIPSE_HOME=/usr/eclipse/
+org.eclipse.jdt.core.classpathVariable.JAVAFX=/home/chris/javafx/javafx-sdk-17.0.2/lib
+org.eclipse.jdt.core.classpathVariable.JRE_LIB=/usr/eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_17.0.1.v20211116-1657/jre/lib/jrt-fs.jar
+org.eclipse.jdt.core.classpathVariable.JRE_SRC=/usr/eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_17.0.1.v20211116-1657/jre/lib/src.zip
+org.eclipse.jdt.core.classpathVariable.JRE_SRCROOT=
+org.eclipse.jdt.core.classpathVariable.JUNIT_HOME=/usr/eclipse/plugins/org.junit_4.13.2.v20211018-1956.jar
+org.eclipse.jdt.core.classpathVariable.M2_REPO=/home/chris/.m2/repository
+org.eclipse.jdt.core.codeComplete.visibilityCheck=enabled
+org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
+org.eclipse.jdt.core.userLibrary.JavaFx=<?xml version\="1.0" encoding\="UTF-8"?>\n<userlibrary systemlibrary\="false" version\="2">\n\t<archive path\="/home/chris/javafx/javafx-sdk-17.0.2/lib/javafx.base.jar"/>\n\t<archive path\="/home/chris/javafx/javafx-sdk-17.0.2/lib/javafx.controls.jar"/>\n\t<archive path\="/home/chris/javafx/javafx-sdk-17.0.2/lib/javafx.fxml.jar"/>\n\t<archive path\="/home/chris/javafx/javafx-sdk-17.0.2/lib/javafx.graphics.jar"/>\n\t<archive path\="/home/chris/javafx/javafx-sdk-17.0.2/lib/javafx.media.jar"/>\n\t<archive path\="/home/chris/javafx/javafx-sdk-17.0.2/lib/javafx.swing.jar"/>\n\t<archive path\="/home/chris/javafx/javafx-sdk-17.0.2/lib/javafx.web.jar"/>\n\t<archive path\="/home/chris/javafx/javafx-sdk-17.0.2/lib/javafx-swt.jar"/>\n</userlibrary>\n

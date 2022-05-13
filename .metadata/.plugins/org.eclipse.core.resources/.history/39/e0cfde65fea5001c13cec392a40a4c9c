@@ -1,0 +1,311 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
+
+
+public class Game {
+	Dictionary dict ;
+	private int points;
+	private String Word;
+	private String[] Letters;
+	private List<String> Displayed = new ArrayList<String>();
+	private int wguesses;
+	private int guesses;
+	private List<String> words;
+	
+	static String fileName = "log.txt";
+	Game (){
+		/**
+		   *
+		   * The Constructor of the Game class
+		   *
+		*/
+		points = 0;
+		wguesses = 0;
+		guesses = 0;
+		
+	}
+	void setDict(String dictid) {
+		/**
+		   *
+		   * Select Dictionary for this Game
+		   *
+		*/
+		dict = new Dictionary(dictid);
+		words = dict.load();
+	}
+	double probability(String c, int pos ) {
+		/**
+		   *
+		   * Get Probability that character c is in position pos
+		   *
+		*/
+		double total = 0.0;
+		double good= 0.0;
+
+		for (String s : words) {
+			total += 1.0;
+			if (s.length()>pos)
+			if (s.charAt(pos) == c.charAt(0)) good+= 1.0;
+		}
+		return good/total ;
+	}
+	int getPoints() {
+		/**
+		   *
+		   * return the points of the game
+		   *
+		*/
+		return points;
+	} 
+	int getDictsize() {
+		/**
+		   *
+		   * return number of available words in the dictionary
+		   *
+		*/
+		int i = 0;
+		for (String w : words) {
+			i++;
+		}
+		return i;
+	}
+	List<String> Listperpos(int pos){
+		/**
+		   *
+		   * return a list of most probable character for position pos
+		   *
+		*/
+		List <String>res = new ArrayList <String>();
+		List<myPair> pairs = new ArrayList <myPair>(); 
+		for (char c = 'A'; c <='Z' ; c++) {
+			double pr = probability(String.valueOf(c),pos);
+			if (pr!=0.0)
+			pairs.add(new myPair(pr,c));
+		}
+		Collections.sort(pairs,new myPair.ComPair());
+		for (String i : words) {
+		}
+		for (myPair p : pairs) {
+			
+			res.add(String.valueOf( p.getChar()));
+		}
+		return res;
+	}
+	void setWord() {
+		/**
+		   *
+		   * Tselects a random word for the game
+		   *
+		*/
+		
+		Random rand = new Random();
+		int index = rand.nextInt(words.size());
+		Word = words.get(index);
+		Letters = Word.split("");
+
+		for (int i = 0; i < Word.length(); i++) {
+			Displayed.add("_");
+		}
+		List <String> words_copy = new ArrayList<String>(words);
+//		System.out.println("Word  = "+ Word); //for debugging
+		for (String w : words_copy) {
+			if (w.length() != Word.length()) {
+				words.remove(w);
+			}
+		}
+		
+	}	
+
+	String getWord() {
+		/**
+		   *
+		   * returns the chosen word of the game
+		   *
+		*/
+		return Word;
+	}
+	String getDisplayed() {
+		/**
+		   *
+		   * returns the word with _ in not found positions
+		   *
+		*/
+		String res= "";
+		for (String l : Displayed) {
+			res += l;
+			if (l == "_") res += " ";
+					
+		}
+		return res;
+	}
+	boolean guess(String c, Integer pos) {
+		/**
+		   *
+		   * checks if c is in position pos and does all the necessary updates
+		   *
+		*/
+		guesses ++;
+		if (Letters[pos].charAt(0) == c.charAt(0)) {
+			int index;
+				index = pos;
+				double prob = probability(c,index);
+				if (prob < 0.25) points += 30;
+				else if (prob < 0.4) points += 15;
+				else if (prob < 0.6) points += 10;
+				else points += 5;
+				Letters[index] = "";
+				Displayed.set(index,c);
+				List<String> words_copy = new ArrayList<String>(words);
+				for (String w : words_copy) {
+					if (w.charAt(index)!= c.charAt(0)) {
+						words.remove(w);
+					}
+				}
+		return true;
+		}
+		else {
+			wguesses += 1;
+			return false;
+		}
+		
+	}
+	boolean checkwin() {
+		/**
+		   *
+		   * Chacks if the Game is Won (all Letters are found)
+		   *
+		*/
+		for (String S : Letters) {
+
+			if (S != "") return false;
+		}
+		return true;
+	}
+	boolean checkloose() {
+		/**
+		   *
+		   * Checks if game is Lost (more than 6 guesses)
+		   *
+		*/
+		if (wguesses >= 6) return true;
+		else return false;
+	}
+	void log() {
+		/**
+		   *
+		   * logs current game based on current game state
+		   *
+		*/
+		log(!checkloose());
+	}
+	int getWguesses() {
+		/**
+		   *
+		   * return number of wrong guesses
+		   *
+		*/
+		return wguesses;
+	}
+	int getGuesses() {
+		/**
+		   *
+		   * return number of  guesses
+		   *
+		*/
+		return guesses;
+	}
+	void log(boolean state) {
+		/**
+		   *
+		   * logs game as won if state = true or lost if state = false
+		   *
+		*/
+		String Winner = (!state)?"Computer":"Player";
+		String res = "Word: "+ Word+ " \t- Winner: "+ Winner +"\t - Guesses: "+guesses;
+		try {
+		File mFile = new File(fileName);
+		FileInputStream fis = new FileInputStream(mFile);
+		BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+		String result = "\n";
+		String line = "";
+		while( (line = br.readLine()) != null){
+		 result = result + line + "\n";
+		 
+		}
+
+		result = res + result;
+
+		mFile.delete();
+		FileOutputStream fos;
+
+		fos = new FileOutputStream(mFile);
+		
+		fos.write(result.getBytes());
+		fos.flush();
+		br.close();
+		fos.close()
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	static List<String> getLog(int Games) {
+		/**
+		   *
+		   * returns the outcome of the last games, equal in number of Games variable
+		   *
+		*/
+		List<String> l = new ArrayList<String>();
+	    try (LineNumberReader lineNumberReader = new LineNumberReader(new FileReader(fileName))) {
+	         String line = lineNumberReader.readLine();
+	         for(int i = 1; i <= Games; i++){
+	            int number = lineNumberReader.getLineNumber();
+	            l.add(line);
+	            line = lineNumberReader.readLine();
+	            if(line == null){
+	               break;
+	            }
+	         }
+	      }catch (IOException e) {
+		        System.out.println("An error occurred.");
+		        e.printStackTrace();
+		      }
+		return l;
+	}
+	static void newDictionary(String id) throws InvalidRangeException, UndersizeException, UnbalancedException, IOException {
+		/**
+		   *
+		   * Create a new Dictionary
+		   *
+		*/
+		UrltoJson url = new UrltoJson();
+		String path = "https://openlibrary.org/books/"+id+".json";
+		String res = url.download(path);
+		Dictionary dict = new Dictionary(id);
+		dict.fromString(res);
+	}
+	public int getWsize() {
+		/**
+		   *
+		   * return number of available words
+		   *
+		*/		
+		return words.size();
+	}
+}

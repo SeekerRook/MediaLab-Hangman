@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Hangman/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="src/|lib/" kind="src" path="">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Hangman/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="lib"/>
+	<classpathentry kind="lib" path="lib/javax.json-api-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/javax.json-1.1.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/jfxrt.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/chris/javafx/javafx-sdk-17.0.2/lib/javafx.base.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/chris/javafx/javafx-sdk-17.0.2/lib/javafx.controls.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/chris/javafx/javafx-sdk-17.0.2/lib/javafx.fxml.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/chris/javafx/javafx-sdk-17.0.2/lib/javafx.graphics.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/chris/javafx/javafx-sdk-17.0.2/lib/javafx.media.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/chris/javafx/javafx-sdk-17.0.2/lib/javafx.swing.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/chris/javafx/javafx-sdk-17.0.2/lib/javafx.web.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/chris/javafx/javafx-sdk-17.0.2/lib/javafx-swt.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

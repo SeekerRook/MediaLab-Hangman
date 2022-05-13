@@ -1,0 +1,23 @@
+import java.util.List;
+
+//import java.io.IOException;
+
+public class Test {
+
+	public static void main(String[] args) throws UnbalancedException {
+		// TODO Auto-generated method stub
+		System.out.print("Test\n\n");
+		UrltoJson url = new UrltoJson();
+		String path = "https://openlibrary.org/books/"+args[0]+".json";
+//		String res = url.download(path);
+		Dictionary dict = new Dictionary("OL31390631M");
+
+		dict.print_all();
+		List <String> wordlist = dict.load();
+		for(String word : wordlist) {
+			System.out.print(word);
+		}
+		
+	}
+
+}

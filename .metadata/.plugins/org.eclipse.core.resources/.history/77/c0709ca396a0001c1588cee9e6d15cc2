@@ -1,0 +1,12 @@
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
+public class pressTestButton implements EventHandler<ActionEvent> {
+
+	@Override
+	public void handle(ActionEvent arg0) {
+		score++;
+		sclabel.setText("Score:"+String.valueOf(score));
+	}
+
+}

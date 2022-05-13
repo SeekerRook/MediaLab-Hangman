@@ -1,0 +1,9 @@
+
+public class myPair {
+	private int Freq;
+	private char C;
+	myPair(int freq, char c){
+		Freq = freq;
+		C = c;
+	}
+}
